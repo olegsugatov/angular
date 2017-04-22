@@ -1,0 +1,21 @@
+<!DOCTYPE html> 
+<html lang="en" ng-app="app">
+      	<head>
+	<meta charset="UTF-8">
+	<title>Nested controllers</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.9/angular.min.js"></script>
+	<script src="main.js"></script>
+</head>
+<body>
+	<div ng-controller='myBooksCtrl'>
+		
+		<div ng-controller="angularBookCtrl">
+			<button ng-click='showBook()'>Show Angular Book</button>
+		</div>
+		<div ng-controller="emberBookCtrl">
+			<button ng-click='showBook()'>Show Ember Book</button>
+		</div>
+
+	</div>
+</body>
+</html>
