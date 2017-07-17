@@ -1,6 +1,21 @@
-///////////////////// 17 isolated scope
+///////////////////// 17 transclude element
 
+var app = angular.module('app', []);
 
+app.directive('wrapIn', function () {
+	return {
+		transclude: 'element',
+		link: function (scope, element, attrs, transclude) {
+			var template = $templateCache.get(attrs.wrapIn);
+			var templateElement = angular.element(template);
+			console.log('wrapIn', templateElement);
+			
+			transclude(scope, function (clone) {
+				element.after(templateElement.append(clone));
+			});
+		}
+	};
+});
 
 
 
