@@ -7,9 +7,20 @@
 	<script src="main.js"></script>
 </head>
 <body>
-	My form here
+
+	<div ng-controller="mainCtrl">
+		<input type="text" ng-model='book.name'>
+		<input type="button" ng-click='addBook(book)' value='Add new book for me, please'>
+		<div ng-repeat='book in books'>
+			{{book.name}}
+		</div>
+	</div>
+
+	<!-- My form here -->
 	<!-- <div ng-controller="firstCtrl"></div> -->
-	<form wrap-in="red">
+	
+
+	<!-- 17 	<form wrap-in="red">
 		<div>
 			<label>Email:</label>
 			<input type="text" placeholder="Place your email">
@@ -23,6 +34,6 @@
 
 	<script type="text/ng-template" id='red'>
 		<div class='red'></div>
-	</script>
+	</script> -->
 </body>
 <html>
