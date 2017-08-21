@@ -4,37 +4,18 @@
 	<meta charset="UTF-8">
 	<title>scope: true</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.9/angular.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.9/angular-mocks.js"></script>
+	<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+	<link rel="stylesheet" type="text/css" href="prettify.css">
 	<script src="main.js"></script>
 </head>
 <body>
-
-	<div ng-controller="mainCtrl">
-		<input type="text" ng-model='book.name'>
-		<input type="button" ng-click='addBook(book)' value='Add new book for me, please'>
-		<div ng-repeat='book in books'>
-			{{book.name}}
-		</div>
-	</div>
-
-	<!-- My form here -->
-	<!-- <div ng-controller="firstCtrl"></div> -->
-	
-
-	<!-- 17 	<form wrap-in="red">
+	<ui-source>
 		<div>
-			<label>Email:</label>
-			<input type="text" placeholder="Place your email">
+			<label>Name:</label>
+			<input type='text' ng-model='yourName' placeholder='Enter a name here'>
+			<hr>
+			<h1>Hello {{yourName}}</h1>
 		</div>
-		<div>
-			<label>Password:</label>
-			<input type="Password" placeholder="Enter your password">
-		</div>
-		<button>Submit</button>
-	</form>
-
-	<script type="text/ng-template" id='red'>
-		<div class='red'></div>
-	</script> -->
+	</ui-source>
 </body>
 <html>

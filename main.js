@@ -1,54 +1,77 @@
+///////////////////// 19 compile
+
+var app = angular.module('app', []);
+
+app.directive('uiSource', function() {
+	return {
+		compile: function (elem) {
+			var escape = function (content) {
+				return content.replace(/\</g, '&lt;')
+							  .replace(/\>/g, '&gt;');
+			};
+			// console.log(elem);
+			var pre = angular.element('<pre class="prettyprint"></pre>');
+			var pretty = prettyPrintOne(escape(elem.html()));
+			console.log(pretty);
+			pre.append(pretty);
+			elem.replaceWith(pre);
+			// console.log(pre);
+		}
+	};
+});
+
+
 ///////////////////// 19 ng-mocks
 
-var app = angular.module('app', ['ngMockE2E']);
+// var app = angular.module('app', ['ngMockE2E']);
 
-app.run(function ($httpBackend) {
-	// console.log('RUN APP');
-	var books = [
-		{
-			name: 'AngularJS'
-		},
-		{
-			name: 'EmberJS'
-		}
-	];
+// app.run(function ($httpBackend) {
+// 	// console.log('RUN APP');
+// 	var books = [
+// 		{
+// 			name: 'AngularJS'
+// 		},
+// 		{
+// 			name: 'EmberJS'
+// 		}
+// 	];
 
-	$httpBackend.whenGET('http://localhost:3001/books').respond(200, books);
+// 	$httpBackend.whenGET('http://localhost:3001/books').respond(200, books);
 
-	$httpBackend.whenPOST('http://localhost:3001/books').respond(function (method, url, data) {
-		var result = JSON.parse(data);
-		books.push(result);
-		return [200, result];
-		// console.log('method', method);
-		// console.log('url', url);
-		// console.log('data', data);
-	});
-});
+// 	$httpBackend.whenPOST('http://localhost:3001/books').respond(function (method, url, data) {
+// 		var result = JSON.parse(data);
+// 		books.push(result);
+// 		return [200, result];
+// 		// console.log('method', method);
+// 		// console.log('url', url);
+// 		// console.log('data', data);
+// 	});
+// });
 
-app.controller('mainCtrl', function ($http, $scope){
-	// console.log('mainCtrl');
-	$http.get('http://localhost:3001/books')
-		.success(function (result) {
-			console.log('sucess', result);
-			$scope.books = result;
-		})
-		.error(function (result) {
-			console.log('error');
-		});
+// app.controller('mainCtrl', function ($http, $scope){
+// 	// console.log('mainCtrl');
+// 	$http.get('http://localhost:3001/books')
+// 		.success(function (result) {
+// 			console.log('sucess', result);
+// 			$scope.books = result;
+// 		})
+// 		.error(function (result) {
+// 			console.log('error');
+// 		});
 
-		$scope.addBook = function (book) {
-			console.log(book);
-			$http.post('http://localhost:3001/books', book)
-				.success(function (result) {
-					console.log('Book successfully saved to backend');
-					$scope.books.push(book);
-					$scope.book = null;
-				})
-				.error(function (result){
-					console.log('Error in book post');
-				});
-		};
-});
+// 		$scope.addBook = function (book) {
+// 			console.log(book);
+// 			$http.post('http://localhost:3001/books', book)
+// 				.success(function (result) {
+// 					console.log('Book successfully saved to backend');
+// 					$scope.books.push(book);
+// 					$scope.book = null;
+// 				})
+// 				.error(function (result){
+// 					console.log('Error in book post');
+// 				});
+// 		};
+// });
 
 ///////////////////// 18 http
 
