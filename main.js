@@ -1,25 +1,44 @@
-///////////////////// 19 compile
+///////////////////// 22 Angular Route
 
-var app = angular.module('app', []);
+var app = angular.module('app', ['ngRoute']);
 
-app.directive('uiSource', function() {
-	return {
-		compile: function (elem) {
-			var escape = function (content) {
-				return content.replace(/\</g, '&lt;')
-							  .replace(/\>/g, '&gt;');
-			};
-			// console.log(elem);
-			var pre = angular.element('<pre class="prettyprint"></pre>');
-			var pretty = prettyPrintOne(escape(elem.html()));
-			console.log(pretty);
-			pre.append(pretty);
-			elem.replaceWith(pre);
-			// console.log(pre);
-		}
-	};
+app.config(function ($routeProvider) {
+	$routeProvider
+		.when('/', {
+			templateUrl: 'home.html',
+			controller: 'homeCtrl'
+		})
+		.when('/', {
+			template: '<h1>Post for my site</h1>'
+	})
 });
 
+app.controller('homeCtrl', function ($scope) {
+	console.log('HomeCtrl');
+	$scope.model = {
+		message: 'This is my beautifull homepage'
+	}
+});
+
+///////////////////// 20 compile
+
+// var app = angular.module('app', []);
+
+// app.directive('uiSource', function() {
+// 	return {
+// 		compile: function (elem) {
+// 			var escape = function (content) {
+// 				return content.replace(/\</g, '&lt;')
+// 							  .replace(/\>/g, '&gt;');
+// 			};
+// 			var pre = angular.element('<pre class="prettyprint"></pre>');
+// 			var pretty = prettyPrintOne(escape(elem.html()));
+// 			console.log(pretty);
+// 			pre.append(pretty);
+// 			elem.replaceWith(pre);
+// 		}
+// 	};
+// });
 
 ///////////////////// 19 ng-mocks
 
