@@ -1,4 +1,4 @@
-///////////////////// 23 Route Params
+///////////////////// 24 Route Events
 
 var app = angular.module('app', ['ngRoute']);
 
@@ -19,6 +19,22 @@ app.config(function ($routeProvider) {
 		.otherwise({
 			template: '<h1>404 no such page</h1>'
 		})
+});
+
+app.run(function ($rootScope) {
+	console.log('run');
+	$rootScope.$on('$routeChangeStart', function (even, current, previous, reject) {
+		console.log('changestart', arguments);
+		$rootScope.currentPath = current.$$route.originalPath;
+	});
+
+	$rootScope.$on('$routeChangeSuccess', function (even, current, previous, reject) {
+		console.log('changesuccess', arguments);
+	});
+});
+
+app.controller('pathCtrl', function() {
+
 });
 
 app.controller('homeCtrl', function ($scope) {
@@ -55,6 +71,64 @@ app.factory('postsFactory', function () {
 		}
 	]
 })
+
+///////////////////// 23 Route Params
+
+// var app = angular.module('app', ['ngRoute']);
+
+// app.config(function ($routeProvider) {
+// 	$routeProvider
+// 		.when('/', {
+// 			templateUrl: 'home.html',
+// 			controller: 'homeCtrl'
+// 		})
+// 		.when('/', {
+// 			templateUrl: 'posts.html',
+// 			controller: 'postsCtrl'
+// 		})
+// 		.when('/posts:postId', {
+// 			templateUrl: 'post.html',
+// 			controller: 'postCtrl'
+// 		})
+// 		.otherwise({
+// 			template: '<h1>404 no such page</h1>'
+// 		})
+// });
+
+// app.controller('homeCtrl', function ($scope) {
+// 	console.log('HomeCtrl');
+// 	$scope.model = {
+// 		message: 'This is my beautifull homepage'
+// 	}
+// });
+
+// app.controller('postsCtrl', function ($scope, postsFactory) {
+// 	// console.log('postsCtrl');
+// 	$scope.posts = postsFactory;
+// });
+
+// app.controller('postCtrl', function ($scope, $routeParams, postsFactory) {
+// 	// console.log($routeParams.postId);
+// 	var postId = Number($routeParams.postId);
+// 	$score.post = _.findWhere(postFactory, {id: postId});
+// });
+
+// app.factory('postsFactory', function () {
+// 	return [
+// 		{
+// 			id: 1,
+// 			name: 'Why AngularJS is good ?'
+// 		},
+// 		{
+// 			id: 2,
+// 			name: 'I love AngularJS'
+// 		},
+// 			{
+// 			id: 3,
+// 			name: 'Is AngularJS easy to learn'
+// 		}
+// 	]
+// })
 
 ///////////////////// 22 Angular Route
 
