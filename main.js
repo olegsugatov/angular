@@ -1,4 +1,4 @@
-///////////////////// 22 Angular Route
+///////////////////// 23 Route Params
 
 var app = angular.module('app', ['ngRoute']);
 
@@ -9,8 +9,16 @@ app.config(function ($routeProvider) {
 			controller: 'homeCtrl'
 		})
 		.when('/', {
-			template: '<h1>Post for my site</h1>'
-	})
+			templateUrl: 'posts.html',
+			controller: 'postsCtrl'
+		})
+		.when('/posts:postId', {
+			templateUrl: 'post.html',
+			controller: 'postCtrl'
+		})
+		.otherwise({
+			template: '<h1>404 no such page</h1>'
+		})
 });
 
 app.controller('homeCtrl', function ($scope) {
@@ -19,6 +27,56 @@ app.controller('homeCtrl', function ($scope) {
 		message: 'This is my beautifull homepage'
 	}
 });
+
+app.controller('postsCtrl', function ($scope, postsFactory) {
+	// console.log('postsCtrl');
+	$scope.posts = postsFactory;
+});
+
+app.controller('postCtrl', function ($scope, $routeParams, postsFactory) {
+	// console.log($routeParams.postId);
+	var postId = Number($routeParams.postId);
+	$score.post = _.findWhere(postFactory, {id: postId});
+});
+
+app.factory('postsFactory', function () {
+	return [
+		{
+			id: 1,
+			name: 'Why AngularJS is good ?'
+		},
+		{
+			id: 2,
+			name: 'I love AngularJS'
+		},
+			{
+			id: 3,
+			name: 'Is AngularJS easy to learn'
+		}
+	]
+})
+
+///////////////////// 22 Angular Route
+
+// var app = angular.module('app', ['ngRoute']);
+
+// app.config(function ($routeProvider) {
+// 	$routeProvider
+// 		.when('/', {
+// 			templateUrl: 'home.html',
+// 			controller: 'homeCtrl'
+// 		})
+// 		.when('/', {
+// 			template: '<h1>Post for my site</h1>'
+// 	})
+// });
+
+// app.controller('homeCtrl', function ($scope) {
+// 	console.log('HomeCtrl');
+// 	$scope.model = {
+// 		message: 'This is my beautifull homepage'
+// 	}
+// });
 
 ///////////////////// 20 compile
 
